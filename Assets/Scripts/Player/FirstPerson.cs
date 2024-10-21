@@ -25,13 +25,19 @@ public class FirstPerson : MonoBehaviour
     {
        h= Input.GetAxisRaw("Horizontal");
        v= Input.GetAxisRaw("Vertical");
-       movimiento= new Vector3(h,0,v).normalized;
+       movimiento = new Vector3(h,v,0).normalized;
 
-        float anguloRotacion= Mathf.Atan2(movimiento.x, movimiento.z)*  Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y; //rotar el objeto para que siga los ejes de la cámara. Se usa trigonometría
+       
+
+       // float anguloRotacion= Mathf.Atan2(movimiento.x, movimiento.z)*  Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y; //rotar el objeto para que siga los ejes de la cámara. Se usa trigonometría
         
         if(movimiento.magnitude >0)
         {
+            //Calculo el águlo al que ponerse en funcionamiento
+            float anguloRotacion = Mathf.Atan2(movimiento.x, movimiento.y) * Mathf.Rad2Deg+ Camera.main.transform.eulerAngles.y;
             transform.eulerAngles = new Vector3(0, anguloRotacion, 0);
+
+            Vector3 mov = Quaternion.Euler(0, anguloRotacion, 0) * Vector3.forward;
 
             controller.Move(movimiento * velocidadMovimiento * Time.deltaTime); //No va por físicas así que se usa con tiempo
 
