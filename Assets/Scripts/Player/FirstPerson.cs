@@ -21,7 +21,7 @@ public class FirstPerson : MonoBehaviour
     {
         MoverRotar();
     }
-    void MoverRotar()
+    private void MoverRotar()
     {
        h= Input.GetAxisRaw("Horizontal");
        v= Input.GetAxisRaw("Vertical");
