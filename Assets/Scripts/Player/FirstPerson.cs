@@ -39,7 +39,7 @@ public class FirstPerson : MonoBehaviour
 
             Vector3 mov = Quaternion.Euler(0, anguloRotacion, 0) * Vector3.forward;
 
-            controller.Move(movimiento * velocidadMovimiento * Time.deltaTime); //No va por físicas así que se usa con tiempo
+            controller.Move(mov * velocidadMovimiento * Time.deltaTime); //No va por físicas así que se usa con tiempo
 
 
         }
