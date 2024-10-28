@@ -10,6 +10,11 @@ public class FirstPerson : MonoBehaviour
     CharacterController controller;
     Vector3 movimiento;
 
+    [SerializeField] private float radioDeteccion;
+    [SerializeField] private Transform pies;
+    [SerializeField] private LayerMask queEsSuelo;
+    
+
     
     void Start()
     {
@@ -43,6 +48,16 @@ public class FirstPerson : MonoBehaviour
 
 
         }
+
+
        
     }
+
+
+
+
+
+
+
+
 }
