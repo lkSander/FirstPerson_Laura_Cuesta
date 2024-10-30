@@ -24,6 +24,9 @@ public class FirstPerson : MonoBehaviour
     void Start()
     {
         controller= GetComponent<CharacterController>();
+
+        //Boquear el ratón y que no se vea
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -55,7 +58,8 @@ public class FirstPerson : MonoBehaviour
         {
             //Calculo el águlo al que ponerse en funcionamiento
             float anguloRotacion = Mathf.Atan2(movimiento.x, movimiento.y) * Mathf.Rad2Deg+ Camera.main.transform.eulerAngles.y;
-            transform.eulerAngles = new Vector3(0, anguloRotacion, 0);
+            //transform.eulerAngles = new Vector3(0, anguloRotacion, 0);
+            transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
 
             Vector3 mov = Quaternion.Euler(0, anguloRotacion, 0) * Vector3.forward;
 
