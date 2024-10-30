@@ -690,7 +690,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 948492014}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -758,7 +758,7 @@ Transform:
   m_GameObject: {fileID: 998971577}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.005065918, y: -0.803, z: 0.43799973}
+  m_LocalPosition: {x: 0.08, y: -0.783, z: 0.032}
   m_LocalScale: {x: 0.68195, y: 0.30458, z: 0.13682684}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -775,7 +775,7 @@ GameObject:
   - component: {fileID: 1423672217}
   - component: {fileID: 1423672216}
   - component: {fileID: 1423672215}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1091,7 +1091,7 @@ CharacterController:
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2117279658
@@ -1134,11 +1134,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocidadMovimiento: 5
-  radioDeteccion: 0
+  radioDeteccion: 0.5
   pies: {fileID: 998971578}
   queEsSuelo:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
+  movVertical: {x: 0, y: 0, z: 0}
+  factorGravedad: -9.81
+  alturaSalto: 90
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

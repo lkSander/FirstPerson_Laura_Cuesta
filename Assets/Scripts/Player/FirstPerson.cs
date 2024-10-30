@@ -10,12 +10,17 @@ public class FirstPerson : MonoBehaviour
     CharacterController controller;
     Vector3 movimiento;
 
+    [Header("Detección de Suelo")]
     [SerializeField] private float radioDeteccion;
     [SerializeField] private Transform pies;
     [SerializeField] private LayerMask queEsSuelo;
-    
 
-    
+    [SerializeField] private Vector3 movVertical;
+    [SerializeField] private float factorGravedad;
+    [SerializeField] private float alturaSalto;
+
+
+
     void Start()
     {
         controller= GetComponent<CharacterController>();
@@ -25,6 +30,14 @@ public class FirstPerson : MonoBehaviour
     void Update()
     {
         MoverRotar();
+        AplicarGravedad();
+        if(EnSuelo()==true )
+        {
+            movVertical.y= 0;
+            Saltar();
+        }
+       
+
     }
     private void MoverRotar()
     {
@@ -32,6 +45,8 @@ public class FirstPerson : MonoBehaviour
        v= Input.GetAxisRaw("Vertical");
        movimiento = new Vector3(h,v,0).normalized;
 
+        transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
+        
        
 
        // float anguloRotacion= Mathf.Atan2(movimiento.x, movimiento.z)*  Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y; //rotar el objeto para que siga los ejes de la cámara. Se usa trigonometría
@@ -52,11 +67,31 @@ public class FirstPerson : MonoBehaviour
 
        
     }
+    private void AplicarGravedad()
+    {
+        movVertical.y += factorGravedad * Time.deltaTime;
+        controller.Move(movVertical * Time.deltaTime);
+    }
+    private bool EnSuelo()
+    {
+        //Tirar una esfera de detección en los piescon cierto radio
+        bool resultado = Physics.CheckSphere(pies.position, radioDeteccion, queEsSuelo);
+        return resultado;
+    }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(pies.position, radioDeteccion);
+    }
 
-
-
-
+    private void Saltar()
+    {
+        //saltar la cantidad que quieras
+       if( Input.GetKeyDown(KeyCode.Space))
+        {
+            movVertical.y = Mathf.Sqrt(-2 * factorGravedad * alturaSalto);
+        }
+    }
 
 
 
