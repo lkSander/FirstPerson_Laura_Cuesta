@@ -25,7 +25,7 @@ public class FirstPerson : MonoBehaviour
     {
         controller= GetComponent<CharacterController>();
 
-        //Boquear el ratón y que no se vea
+        ///Boquear el ratón y que no se vea
         Cursor.lockState = CursorLockMode.Locked;
     }
 
