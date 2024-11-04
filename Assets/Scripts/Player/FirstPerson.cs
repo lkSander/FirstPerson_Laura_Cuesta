@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class FirstPerson : MonoBehaviour
@@ -11,12 +12,14 @@ public class FirstPerson : MonoBehaviour
     [SerializeField] float velocidadRotacion;
     float anguloSuave;
 
+    [SerializeField] private float vidas;
+    
+
 
     private float h;
     private float v;
-    CharacterController controller;
-    Vector3 movimiento;
-
+    
+   
     [Header("Detección de Suelo")]
     [SerializeField] private float radioDeteccion;
     [SerializeField] private Transform pies;
@@ -103,6 +106,15 @@ public class FirstPerson : MonoBehaviour
         {
             movVertical.y = Mathf.Sqrt(-2 * factorGravedad * alturaSalto);
         }
+    }
+
+    public void RecibirDanio(float danioEnemigo)
+    {
+
+        vidas-= danioEnemigo;
+
+
+        
     }
 
 

@@ -24,7 +24,7 @@ public class PlayerThirdPerson : MonoBehaviour
     void Update()
     {
         MoverRotar();
-        AplicarGravedad();
+        //AplicarGravedad();
     }
     private void MoverRotar()
     {
@@ -54,9 +54,9 @@ public class PlayerThirdPerson : MonoBehaviour
         }
 
     }
-    private void AplicarGravedad()
-    {
-        movVertical.y += factorGravedad * Time.deltaTime;
-        controller.Move(movVertical * Time.deltaTime);
-    }
+    //private void AplicarGravedad()
+    //{
+    //    movVertical.y += factorGravedad * Time.deltaTime;
+    //    controller.Move(movVertical * Time.deltaTime);
+    //}
 }
