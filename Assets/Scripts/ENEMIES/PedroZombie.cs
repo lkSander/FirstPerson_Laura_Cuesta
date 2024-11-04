@@ -65,7 +65,7 @@ public class PedroZombie : MonoBehaviour
     {
         agent.SetDestination(player.gameObject.transform.position);
 
-        if (agent.remainingDistance <= agent.stoppingDistance)
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
         {
             agent.isStopped = true; //el eneimgo se queda quieto si loe empujas a esa distancia
             animator.SetBool("Attacking", true);
