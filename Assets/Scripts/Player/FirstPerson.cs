@@ -5,6 +5,13 @@ using UnityEngine;
 public class FirstPerson : MonoBehaviour
 {
     [SerializeField] private float velocidadMovimiento;
+    CharacterController controller;
+    private Vector3 movimiento;
+    [SerializeField] float smoothTime;
+    [SerializeField] float velocidadRotacion;
+    float anguloSuave;
+
+
     private float h;
     private float v;
     CharacterController controller;
@@ -23,7 +30,8 @@ public class FirstPerson : MonoBehaviour
 
     void Start()
     {
-        controller= GetComponent<CharacterController>();
+        
+        controller = GetComponent<CharacterController>();
 
         ///Boquear el ratón y que no se vea
         Cursor.lockState = CursorLockMode.Locked;
