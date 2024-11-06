@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArmaSO : MonoBehaviour
+[CreateAssetMenu(menuName ="Arma")]
+public class ArmaSO :ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //DATOS
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public int municionCargada;
+    public int municionCartucho;
+    public float cadenciaAtaque;
+    public float distanciaAtaque;
+    public float danioAtaque;
 }
