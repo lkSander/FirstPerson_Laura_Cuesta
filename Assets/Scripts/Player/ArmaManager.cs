@@ -6,6 +6,7 @@ public class ArmaManager : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] private ArmaSO misDatos;
+    [SerializeField] private ParticleSystem system;
     
 
 
