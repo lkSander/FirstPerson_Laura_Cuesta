@@ -21,9 +21,12 @@ public class ArmaManager : MonoBehaviour
     {
         if(Input.GetMouseButton(0))
         {
+            system.Play();
            if( Physics.Raycast(cam.transform.position,cam.transform.forward, out RaycastHit hitInfo, misDatos.distanciaAtaque))
             {
                 Debug.Log(hitInfo.transform.name);
+               
+
             }
         }
     }
