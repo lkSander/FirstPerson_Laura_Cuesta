@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class ArmaManager : MonoBehaviour
 {
@@ -8,11 +9,13 @@ public class ArmaManager : MonoBehaviour
     [SerializeField] private ArmaSO misDatos;
     [SerializeField] private ParticleSystem system;
     
+    private Animator animator;
 
 
     private Camera cam;
     void Start()
     {
+        animator=GetComponent<Animator>();  
         cam = Camera.main;//MainCamera
     }
 
@@ -21,13 +24,19 @@ public class ArmaManager : MonoBehaviour
     {
         if(Input.GetMouseButton(0))
         {
+            animator.SetTrigger(1);
             system.Play();
            if( Physics.Raycast(cam.transform.position,cam.transform.forward, out RaycastHit hitInfo, misDatos.distanciaAtaque))
             {
                 Debug.Log(hitInfo.transform.name);
+                if(hitInfo.transform.CompareTag("Enemigo"))
+                {
+                    hitInfo.transform.GetComponent<PedroZombie>().RecibirDanho(misDatos.danioAtaque);
+                }
                
 
             }
+           animator.SetTrigger(2);
         }
     }
 }

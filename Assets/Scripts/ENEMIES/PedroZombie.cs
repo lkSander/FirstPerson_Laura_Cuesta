@@ -9,9 +9,12 @@ public class PedroZombie : MonoBehaviour
 {
     [SerializeField] Transform puntoAtaque;
     [SerializeField] private float radioAtaque;
-    [SerializeField] private LayerMask queEsDañable;
+    [SerializeField] private LayerMask queEsDaniable;
+    [SerializeField] private ArmaSO misDatos;
 
     private bool puedoDaniar = true;
+
+    [SerializeField] private float vida;
 
     private NavMeshAgent agent;
     private FirstPerson player;
@@ -20,12 +23,17 @@ public class PedroZombie : MonoBehaviour
     [SerializeField] private float danioEnemigo;
 
     private bool ventanaAbierta;
+
+    Rigidbody[] huesos;
     // Start is called before the first frame update
     void Start()
     {
         agent= GetComponent<NavMeshAgent>();
         player=GameObject.FindObjectOfType<FirstPerson>();
         animator = GetComponent<Animator>();
+        huesos=GetComponentsInChildren<Rigidbody>();
+
+        CambiarEstadoHuesos(true);
     }
 
     // Update is called once per frame
@@ -46,7 +54,7 @@ public class PedroZombie : MonoBehaviour
         //1.attack point referencia
         //2. recrear variable responsable al radio
         //3. variable que es dañable (layer)
-        Collider[] collDetectados= Physics.OverlapSphere(puntoAtaque.position, radioAtaque, queEsDañable);
+        Collider[] collDetectados= Physics.OverlapSphere(puntoAtaque.position, radioAtaque, queEsDaniable);
         if (collDetectados.Length > 0 )
         {
             //aplicar daño a todos los colliders
@@ -94,5 +102,24 @@ public class PedroZombie : MonoBehaviour
     private void CerrarVentana()
     {
         ventanaAbierta=false;   
+    }
+    private void CambiarEstadoHuesos(bool estado)
+    {
+        for (int i = 0; i < huesos.Length; i++)
+        {
+            huesos[i].isKinematic = estado;
+
+        }
+        
+    }
+    public void RecibirDanho(float danhioRecibido)
+    {
+       vida-= danhioRecibido;
+        if (vida <= 0)
+        {
+            CambiarEstadoHuesos(false);
+           
+        }
+
     }
 }
