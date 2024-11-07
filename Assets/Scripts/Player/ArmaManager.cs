@@ -29,7 +29,7 @@ public class ArmaManager : MonoBehaviour
            if( Physics.Raycast(cam.transform.position,cam.transform.forward, out RaycastHit hitInfo, misDatos.distanciaAtaque))
             {
                 Debug.Log(hitInfo.transform.name);
-                if(hitInfo.transform.CompareTag("Enemigo"))
+                if(hitInfo.transform.CompareTag("PartEnemy"))
                 {
                     hitInfo.transform.GetComponent<PedroZombie>().RecibirDanho(misDatos.danioAtaque);
                 }
