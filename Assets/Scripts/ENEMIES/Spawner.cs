@@ -13,12 +13,24 @@ public class Spawner : MonoBehaviour
     {
         //.position porque busca un vector3
         //quaternion.identity es 0,0,0
-        Instantiate(enemigoPrefab, puntosSpawn[0].position, Quaternion.identity);
+        StartCoroutine(SpawnEnemigos());
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    IEnumerator SpawnEnemigos()
+    {
+        while(true)
+        {
+            Instantiate(enemigoPrefab, puntosSpawn[Random.Range(0, puntosSpawn.Length)].position, Quaternion.identity);
+
+            yield return new WaitForSeconds(3);
+        }
+        
+
     }
 }
