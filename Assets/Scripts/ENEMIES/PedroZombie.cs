@@ -39,7 +39,11 @@ public class PedroZombie : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Perseguir();
+        if(agent.enabled)
+        {
+            Perseguir();
+        }
+       
 
         if(ventanaAbierta && puedoDaniar)
         {

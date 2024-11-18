@@ -7,6 +7,12 @@ public class Spawner : MonoBehaviour
 
     [SerializeField] private GameObject enemigoPrefab;
     [SerializeField] private Transform[] puntosSpawn;
+    [SerializeField] private int numNiveles;
+    [SerializeField] private int rondasNiveles;
+    [SerializeField] private float esperaEntreSpawns;
+    [SerializeField] private float esperaEntreRondas;
+    [SerializeField] private float spawnPorRonda;
+    [SerializeField] private float esperaEntreNiveles;
 
     // Start is called before the first frame update
     void Start()
@@ -24,13 +30,31 @@ public class Spawner : MonoBehaviour
 
     IEnumerator SpawnEnemigos()
     {
-        while(true)
-        {
-            Instantiate(enemigoPrefab, puntosSpawn[Random.Range(0, puntosSpawn.Length)].position, Quaternion.identity);
 
-            yield return new WaitForSeconds(3);
+        for(int i = 0; i<  numNiveles; i++)
+        {
+
+            for (int j = 0; j < rondasNiveles; j++)
+            {
+
+                for(float k = 0; k < spawnPorRonda; k++)
+                {
+                    
+                    
+                       Instantiate(enemigoPrefab, puntosSpawn[Random.Range(0, puntosSpawn.Length)].position, Quaternion.identity);
+
+                        yield return new WaitForSeconds(esperaEntreSpawns);
+                    
+
+                }
+                yield return new WaitForSeconds(esperaEntreRondas); 
+            }
+
+            yield return new WaitForSeconds(esperaEntreNiveles);
+             
+
+
         }
-        
 
     }
 }
