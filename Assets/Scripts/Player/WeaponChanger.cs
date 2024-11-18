@@ -15,7 +15,7 @@ public class WeaponChanger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CAmbiarArmaRaton();
+        CambiarArmaRaton();
         CambiarArmaConTeclado();    
 
     }
@@ -27,17 +27,17 @@ public class WeaponChanger : MonoBehaviour
             CambiarArma(0);
 
         }
-        if (Input.GetKeyUp(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad2))
+        if (Input.GetKeyUp(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
         {
             CambiarArma(1);
 
         }
-        if (Input.GetKeyUp(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad3))
+        if (Input.GetKeyUp(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3))
         {
             CambiarArma(2);
 
         }
-        if (Input.GetKeyUp(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad4))
+        if (Input.GetKeyUp(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Keypad4))
         {
             CambiarArma(3);
         }
@@ -47,24 +47,37 @@ public class WeaponChanger : MonoBehaviour
     {
         armas[indiceArmaActual].SetActive(false);
 
-        
 
-        indiceArmaActual=indiceNuevaArma;
+
+        //indiceArmaActual=indiceNuevaArma;
+
+        //if (indiceNuevaArma < 0)
+        //{
+        //    indiceArmaActual = armas.Length - 1;
+        //}
+        //else if (indiceNuevaArma > armas.Length - 1)
+        //{
+        //    indiceArmaActual = 0;
+        //}
+
+      
 
         if (indiceNuevaArma < 0)
         {
-            indiceArmaActual = armas.Length - 1;
+            indiceNuevaArma = armas.Length - 1;
         }
         else if (indiceNuevaArma > armas.Length - 1)
         {
-            indiceArmaActual = 0;
+            indiceNuevaArma = 0;
         }
+
         armas[indiceNuevaArma].SetActive(true);
+        indiceArmaActual = indiceNuevaArma;
     }
 
-    private void CAmbiarArmaRaton()
+    private void CambiarArmaRaton()
     {
-        float scrollWheel = Input.GetAxis("Mouse ScrollWheell");
+        float scrollWheel = Input.GetAxis("Mouse ScrollWheel")  ;
 
         if(scrollWheel>0)
         {
