@@ -18,9 +18,9 @@ public class Bazoocaa : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(granadaPrefab, spawnPoint.position, Quaternion.identity);
+            Instantiate(granadaPrefab, spawnPoint.position, transform.rotation);
 
-            // Instantiate(enemigoPrefab, puntosSpawn[Random.Range(0, puntosSpawn.Length)].position, Quaternion.identity);
+           
         }
 
 
