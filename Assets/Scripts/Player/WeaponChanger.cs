@@ -17,7 +17,7 @@ public class WeaponChanger : MonoBehaviour
     {
         CambiarArmaRaton();
         CambiarArmaConTeclado();
-        armas[indiceArmaActual].SetActive(true);
+       
 
     }
     private void CambiarArmaConTeclado()
@@ -50,7 +50,7 @@ public class WeaponChanger : MonoBehaviour
 
 
 
-        indiceArmaActual=indiceNuevaArma;
+        
 
         //if (indiceNuevaArma < 0)
         //{

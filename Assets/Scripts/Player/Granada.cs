@@ -38,18 +38,12 @@ public class Granada : MonoBehaviour
         {
             for(int i = 0; i < explotadosDetectados; ++i)
             {
-                buffer[i].TryGetComponent(out PedroZombie scriptHuesos);
-                //scriptHuesos.Explotar();
+               if( buffer[i].TryGetComponent(out ParteEnemigo scriptHuesos))
+               {
+                    scriptHuesos.Explotar(fuerzaImpulso, transform.position, radioGranada, 3.5f);
+
+               }
             }
-
-
         }
-
-    }
-
-    public void Explotar()
-
-    {
-        
     }
 }
