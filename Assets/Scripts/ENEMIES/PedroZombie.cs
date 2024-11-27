@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -28,10 +29,10 @@ public class PedroZombie : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        agent= GetComponent<NavMeshAgent>();
-        player=GameObject.FindObjectOfType<FirstPerson>();
+        agent = GetComponent<NavMeshAgent>();
+        player = GameObject.FindObjectOfType<FirstPerson>();
         animator = GetComponent<Animator>();
-        huesos=GetComponentsInChildren<Rigidbody>();
+        huesos = GetComponentsInChildren<Rigidbody>();
 
         CambiarEstadoHuesos(true);
     }
@@ -39,17 +40,17 @@ public class PedroZombie : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(agent.enabled)
+        if (agent.enabled)
         {
             Perseguir();
         }
-       
 
-        if(ventanaAbierta && puedoDaniar)
+
+        if (ventanaAbierta && puedoDaniar)
         {
             DetectarImpacto();
         }
-        
+
     }
 
     private void DetectarImpacto()
@@ -58,18 +59,18 @@ public class PedroZombie : MonoBehaviour
         //1.attack point referencia
         //2. recrear variable responsable al radio
         //3. variable que es dañable (layer)
-        Collider[] collDetectados= Physics.OverlapSphere(puntoAtaque.position, radioAtaque, queEsDaniable);
-        if (collDetectados.Length > 0 )
+        Collider[] collDetectados = Physics.OverlapSphere(puntoAtaque.position, radioAtaque, queEsDaniable);
+        if (collDetectados.Length > 0)
         {
             //aplicar daño a todos los colliders
-            for(int i = 0; i < collDetectados.Length; i++)
+            for (int i = 0; i < collDetectados.Length; i++)
             {
 
                 collDetectados[i].GetComponent<FirstPerson>().RecibirDanio(danioEnemigo);
 
 
             }
-            puedoDaniar= false;
+            puedoDaniar = false;
         }
     }
 
@@ -83,9 +84,25 @@ public class PedroZombie : MonoBehaviour
             animator.SetBool("Attacking", true);
             puedoDaniar = true;
 
-
+            EnfocarObjetivo();
         }
     }
+
+
+    private void EnfocarObjetivo()
+    {
+        Vector3 direccionAObjetivo = (player.transform.position - transform.position).normalized;
+
+        direccionAObjetivo.y = 0;
+
+       Quaternion rotacionAObjetivo= Quaternion.LookRotation(direccionAObjetivo);
+
+        transform.rotation= rotacionAObjetivo;
+
+    }
+
+   
+
 
     private void OnCollisionEnter(Collision collision)
     {
