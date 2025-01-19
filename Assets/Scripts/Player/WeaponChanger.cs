@@ -5,11 +5,15 @@ using UnityEngine;
 public class WeaponChanger : MonoBehaviour
 {
     [SerializeField] private GameObject[] armas;
+    [SerializeField] GameObject EspadaFuego;
+    
     private int indiceArmaActual;
     // Start is called before the first frame update
+    float dinero;
+    bool espadaEspecial=false;
     void Start()
     {
-        
+        dinero = GameObject.FindObjectOfType<CanvasManager>().Dinero;
     }
 
     // Update is called once per frame
@@ -18,7 +22,10 @@ public class WeaponChanger : MonoBehaviour
         CambiarArmaRaton();
         CambiarArmaConTeclado();
        
-
+        if(dinero>=200)
+        {
+            espadaEspecial = true;
+        }
     }
     private void CambiarArmaConTeclado()
     {
@@ -33,15 +40,25 @@ public class WeaponChanger : MonoBehaviour
             CambiarArma(1);
 
         }
-        if (Input.GetKeyUp(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3))
+        if ((Input.GetKeyUp(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3)) && espadaEspecial == true)
         {
             CambiarArma(2);
+            
+            EspadaFuego.SetActive(true);
 
         }
-        if (Input.GetKeyUp(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Keypad4))
-        {
-            CambiarArma(3);
-        }
+
+        //if (Input.GetKeyUp(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Keypad4))
+        //{
+        //    CambiarArma(3);
+            
+
+        //}
+        
+        //if (Input.GetKeyUp(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.Keypad4))
+        //{
+        //    CambiarArma(3);
+        //}
 
     }
     private void CambiarArma(int indiceNuevaArma)

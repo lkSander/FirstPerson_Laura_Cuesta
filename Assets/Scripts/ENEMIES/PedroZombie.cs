@@ -12,6 +12,7 @@ public class PedroZombie : MonoBehaviour
     [SerializeField] private float radioAtaque;
     [SerializeField] private LayerMask queEsDaniable;
     [SerializeField] private ArmaSO misDatos;
+    [SerializeField] GameObject monedasOroPrefab;
 
     private bool puedoDaniar = true;
 
@@ -34,7 +35,7 @@ public class PedroZombie : MonoBehaviour
         animator = GetComponent<Animator>();
         huesos = GetComponentsInChildren<Rigidbody>();
 
-        CambiarEstadoHuesos(true);
+        //CambiarEstadoHuesos(true);
     }
 
     // Update is called once per frame
@@ -67,7 +68,7 @@ public class PedroZombie : MonoBehaviour
             {
 
                 collDetectados[i].GetComponent<FirstPerson>().RecibirDanio(danioEnemigo);
-
+                Debug.Log("nya");
 
             }
             puedoDaniar = false;
@@ -124,23 +125,36 @@ public class PedroZombie : MonoBehaviour
     {
         ventanaAbierta=false;   
     }
-    private void CambiarEstadoHuesos(bool estado)
-    {
-        for (int i = 0; i < huesos.Length; i++)
-        {
-            huesos[i].isKinematic = estado;
+    //private void CambiarEstadoHuesos(bool estado)
+    //{
+    //    for (int i = 0; i < huesos.Length; i++)
+    //    {
+    //       huesos[i].isKinematic = estado;
 
-        }
+    //    }
         
-    }
+    //}
     public void RecibirDanho(float danhioRecibido)
     {
-       vida-= danhioRecibido;
+        Debug.Log("Dadeujas");
+        vida -= danhioRecibido;
         if (vida <= 0)
         {
-            CambiarEstadoHuesos(false);
            
+            // CambiarEstadoHuesos(false);
+            monedasOroPrefab.transform.position = this.transform.position;
+            Instantiate(monedasOroPrefab);
+            //monedasOroPrefab.transform.position = this.transform.position;
+
+           Destroy(gameObject);
+            //meter animacion muerte antes del destroy y el num de segundos el de la animacion.
         }
 
+    }
+    private void OnDrawGizmosSelected()
+    {
+        //Ver el radio del ataque de la espada
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(puntoAtaque.position, misDatos.distanciaAtaque);
     }
 }

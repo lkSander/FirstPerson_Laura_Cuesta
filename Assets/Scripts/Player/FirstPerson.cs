@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class FirstPerson : MonoBehaviour
 {
@@ -13,7 +16,8 @@ public class FirstPerson : MonoBehaviour
     float anguloSuave;
 
     [SerializeField] private float vidas;
-    
+
+   // int plata = 0;
 
 
     private float h;
@@ -29,7 +33,12 @@ public class FirstPerson : MonoBehaviour
     [SerializeField] private float factorGravedad;
     [SerializeField] private float alturaSalto;
 
+    
 
+
+    [SerializeField] TMP_Text vida;
+
+    public float Vidas { get => vidas; set => vidas = value; }
 
     void Start()
     {
@@ -43,6 +52,8 @@ public class FirstPerson : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //vida.SetText(""+vidas);
+        
         MoverRotar();
         AplicarGravedad();
         if(EnSuelo()==true )
@@ -61,8 +72,6 @@ public class FirstPerson : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
         
-       
-
        // float anguloRotacion= Mathf.Atan2(movimiento.x, movimiento.z)*  Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y; //rotar el objeto para que siga los ejes de la cámara. Se usa trigonometría
         
         if(movimiento.magnitude >0)
@@ -79,8 +88,6 @@ public class FirstPerson : MonoBehaviour
 
         }
 
-
-       
     }
     private void AplicarGravedad()
     {
@@ -112,9 +119,23 @@ public class FirstPerson : MonoBehaviour
     {
 
         vidas-= danioEnemigo;
-
+        if(vidas<=0)
+        {
+            SceneManager.LoadScene(2);
+        }
 
         
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Water"))
+        {
+            float timer= Time.deltaTime;
+            if(timer >= 4)
+            {
+                SceneManager.LoadScene(3);
+            }
+        }
     }
 
 

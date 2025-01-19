@@ -7,9 +7,8 @@ public class ArmaSO :ScriptableObject
 {
     //DATOS
 
-    public int municionCargada;
-    public int municionCartucho;
-    public float cadenciaAtaque;
+
+    public float esperaAtaque;
     public float distanciaAtaque;
     public float danioAtaque;
 }
